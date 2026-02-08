@@ -10,6 +10,7 @@ CHANNEL_ID = None
 total_xp = 0
 wins = 0
 losses = 0
+ties = 0
 current_message = True
 total_hunts = 0
 
@@ -104,20 +105,22 @@ async def handleBotMessage(message):
         handleHuntMessage(message)
 
 def handleBattleMessage(embed):
-    global total_xp, wins, losses
+    global total_xp, wins, losses, ties
     #extract the fighter's name, battle result, and xp gained from the embed message
     fighter = getNameFromAuthor(embed.author)
     result = getResultFromFooter(embed.footer.text)
     xp = getXpFromFooter(embed.footer.text)
-    #if the fighter is the bot itself, update the total xp, wins, and losses accordingly and print the results, otherwise just print the battle message details
+    #if the fighter is the bot itself, update the total xp, wins, losses, and ties accordingly and print the results, otherwise just print the battle message details
     if fighter == client.user.display_name:
         print(f"Fighter: {fighter} | Result: {result} | XP gained: {xp}")
         total_xp += numberParser(xp)
         if result == "win":
             wins += 1
+        elif result == "tie":
+            ties += 1
         elif result == "lost":
             losses += 1
-        print(f"Total XP: {total_xp} | Wins: {wins} | Losses: {losses}")
+        print(f"Total XP: {total_xp} | Wins: {wins} | Losses: {losses} | Ties: {ties}")
     else:
         print("battle message not of self: ")
         print(f"Fighter: {fighter} | Result: {result} | XP: {xp}")
