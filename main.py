@@ -1,4 +1,4 @@
-import time
+import asyncio
 import discord
 from config import TOKEN, BOT_ID, MIN_DELAY, MAX_DELAY
 import random
@@ -160,7 +160,7 @@ async def main():
         
         #alternate the message to be sent in the next iteration
         current_message = not current_message
-        time.sleep(random.randint(MIN_DELAY, MAX_DELAY))
+        await asyncio.sleep(random.randint(MIN_DELAY, MAX_DELAY))
         
 
 
