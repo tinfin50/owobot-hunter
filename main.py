@@ -129,6 +129,7 @@ async def on_ready():
     print(f"succesfully logged in as {client.user}")
 
 #event handler that listens for messages, if the message starts with "$start" and is sent by the bot itself, it sets the channel ID and starts the main loop, if the message starts with "$stop" and is sent by the bot itself, it stops the main loop, if the message is sent by the owo bot and is in the correct channel it calls the handleBotMessage function to process the message
+@client.event
 async def on_message(message):
     global CHANNEL_ID
     if message.content.startswith("$start") and message.author.id == client.user.id:
